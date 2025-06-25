@@ -21,6 +21,10 @@ pre-commit = "^4.2.0"
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.14.1"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.4.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -44,3 +48,4 @@ format = { cmd = "black {src} && isort {src}", help = "Aplica black e isort no c
 typecheck = { cmd = "mypy {src}", help = "Roda verificação de tipos com mypy", use_vars = true }
 security = { cmd = "bandit -r {src}", help = "Roda Bandit para verificar falhas de segurança no código", use_vars = true }
 precommit = { cmd = "pre-commit run --all-files", help = "Executa todos os hooks do pre-commit manualmente", use_vars = true }
+test = { cmd = "pytest -v tests", help = "Executa os testes com pytest" }
