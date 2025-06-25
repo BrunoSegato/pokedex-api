@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Projeto de estudo de FastAPI com Postgres"
 authors = ["Bruno Segato <brunosegatoit@gmail.com>"]
 readme = "README.md"
+packages = [{ include = "pokedex" }]
 
 [tool.poetry.dependencies]
 python = "^3.13"
