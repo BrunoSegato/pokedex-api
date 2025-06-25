@@ -7,6 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
+fastapi = {extras = ["standard"], version = "^0.115.13"}
 
 
 [tool.poetry.group.lint.dependencies]
@@ -40,7 +41,7 @@ profile = "black"
 max-line-length = 88
 
 [tool.taskipy.variables]
-src = "."
+src = "pokedex"
 
 [tool.taskipy.tasks]
 lint = { cmd = "flake8 {src}", help = "Roda flake8 para verificar estilo e erros", use_vars = true }
