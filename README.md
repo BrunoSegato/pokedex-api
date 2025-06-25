@@ -57,13 +57,14 @@ poetry run task --help  # lista todos os comandos disponíveis
 
 ### Comandos disponíveis:
 
-| Comando                     | Descrição                                      |
-|----------------------------|-----------------------------------------------|
-| `poetry run task lint`     | Roda `flake8` para verificação de estilo       |
-| `poetry run task format`   | Aplica `black` e `isort` no código             |
-| `poetry run task typecheck`| Verificação de tipos com `mypy`                |
-| `poetry run task security` | Análise de segurança com `bandit`              |
-| `poetry run task precommit`| Executa todos os hooks do `pre-commit`         |
+| Comando                     | Descrição                                |
+|-----------------------------|------------------------------------------|
+| `poetry run task lint`      | Roda `flake8` para verificação de estilo |
+| `poetry run task format`    | Aplica `black` e `isort` no código       |
+| `poetry run task typecheck` | Verificação de tipos com `mypy`          |
+| `poetry run task security`  | Análise de segurança com `bandit`        |
+| `poetry run task precommit` | Executa todos os hooks do `pre-commit`   |
+| `poetry run task test`      | Executa os testes com `pytest`           |
 
 ---
 
