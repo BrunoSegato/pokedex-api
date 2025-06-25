@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "pokedex-api"
+version = "0.1.0"
+description = "Projeto de estudo de FastAPI com Postgres"
+authors = ["Bruno Segato <brunosegatoit@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+
+[tool.poetry.group.lint.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+flake8 = "^7.3.0"
+mypy = "^1.16.1"
+bandit = "^1.8.5"
+pre-commit = "^4.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.14.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 88
+
+[tool.taskipy.variables]
+src = "."
+
+[tool.taskipy.tasks]
+lint = { cmd = "flake8 {src}", help = "Roda flake8 para verificar estilo e erros", use_vars = true }
+format = { cmd = "black {src} && isort {src}", help = "Aplica black e isort no código", use_vars = true }
+typecheck = { cmd = "mypy {src}", help = "Roda verificação de tipos com mypy", use_vars = true }
+security = { cmd = "bandit -r {src}", help = "Roda Bandit para verificar falhas de segurança no código", use_vars = true }
+precommit = { cmd = "pre-commit run --all-files", help = "Executa todos os hooks do pre-commit manualmente", use_vars = true }
