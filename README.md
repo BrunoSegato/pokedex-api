@@ -6,6 +6,7 @@
 ![Tests](https://github.com/seu-usuario/pokedex-api/actions/workflows/tests.yml/badge.svg)
 ![License](https://img.shields.io/github/license/seu-usuario/pokedex-api)
 ![codecov](https://codecov.io/gh/BrunoSegato/pokedex-api/branch/main/graph/badge.svg)
+![codecov](https://codecov.io/gh/BrunoSegato/pokedex-api/graph/badge.svg?token=UU9E1SFDOT)
 
 Projeto de estudo com [FastAPI](https://fastapi.tiangolo.com/) e [PostgreSQL](https://www.postgresql.org/), focado em boas práticas de organização, qualidade de código e automação de tarefas.
 
