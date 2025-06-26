@@ -1,11 +1,8 @@
-from fastapi.testclient import TestClient
-
+from pokedex.app import Application
 from pokedex.main import app
 
-client = TestClient(app)
 
+class TestMain:
 
-def test_read_main():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+    def test_app_instance(self):
+        assert isinstance(app, Application)

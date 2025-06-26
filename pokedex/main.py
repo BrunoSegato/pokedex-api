@@ -1,8 +1,4 @@
-from fastapi import FastAPI
+from pokedex.app import Application
+from pokedex.routers import routers
 
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+app = Application(routers)
