@@ -13,4 +13,6 @@ class TestHealthCheckAPI:
         assert response.status_code == 200
         assert response.json() == expected
 
-    def test_healthcheck(self): ...
+    def test_healthcheck(self):
+        response = client.get("/healthcheck")
+        assert response.status_code == 200

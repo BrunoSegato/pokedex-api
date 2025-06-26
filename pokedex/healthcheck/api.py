@@ -9,7 +9,8 @@ service = HealthCheckService()
 
 @router.get("/healthcheck", status_code=status.HTTP_200_OK)
 async def healthcheck():
-    return await service.is_healthy()()
+    service.add_checks("service", service.check_service)
+    return await service.is_healthy()
 
 
 @router.get("/ping", response_model=PingModel, status_code=status.HTTP_200_OK)

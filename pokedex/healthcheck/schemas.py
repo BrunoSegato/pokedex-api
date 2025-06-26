@@ -1,11 +1,22 @@
 from pydantic import BaseModel
 
 
-class HealthCheckModel(BaseModel):
-    status: bool
-    details: dict[str, bool]
+class CheckModel(BaseModel):
+    ok: bool
+    latency_ms: float
 
 
 class PingModel(BaseModel):
     service_name: str
     version: str
+
+
+class HealthCheckModel(PingModel):
+    host: str
+    uptime: str | None = None
+    timestamp: str
+    environment: str
+    status: bool
+    latency_ms: float
+    details: dict[str, CheckModel]
+    status_code: int
