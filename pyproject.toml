@@ -5,7 +5,7 @@ description = "Projeto de estudo de FastAPI com Postgres"
 authors = ["Bruno Segato <brunosegatoit@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "pokedex" }]
-license = "CC-BY-NC-4.0"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.13"
