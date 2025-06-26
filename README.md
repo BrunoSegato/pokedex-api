@@ -4,7 +4,7 @@
 ![Poetry](https://img.shields.io/badge/poetry-1.8.0+-blueviolet)
 ![Lint](https://github.com/BrunoSegato/pokedex-api/actions/workflows/lint.yml/badge.svg)
 ![Tests](https://github.com/BrunoSegato/pokedex-api/actions/workflows/tests.yml/badge.svg)
-![License](https://img.shields.io/github/license/seu-usuario/pokedex-api)
+![License](https://img.shields.io/github/license/BrunoSegato/pokedex-api)
 ![codecov](https://codecov.io/gh/BrunoSegato/pokedex-api/branch/main/graph/badge.svg)
 
 Projeto de estudo com [FastAPI](https://fastapi.tiangolo.com/) e [PostgreSQL](https://www.postgresql.org/), focado em boas práticas de organização, qualidade de código e automação de tarefas.
