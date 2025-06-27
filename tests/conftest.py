@@ -1,7 +1,7 @@
 import pytest
 
 from pokedex.app import Application
-from pokedex.settings import Settings, get_settings
+from pokedex.config import Settings, get_settings
 from tests.fake.routers import routers
 
 

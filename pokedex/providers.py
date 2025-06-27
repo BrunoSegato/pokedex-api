@@ -1,7 +1,7 @@
 from fastapi import Depends
 
+from pokedex.config import Settings, get_settings
 from pokedex.healthcheck.service import HealthCheckService
-from pokedex.settings import Settings, get_settings
 
 
 def get_healthcheck_service(

@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from pokedex.settings import get_settings
+from pokedex.config import get_settings
+from pokedex.logs import config_logging
 from pokedex.utils import load_identifier
 
 settings = get_settings()
@@ -14,7 +15,7 @@ class Application(FastAPI):
             version=settings.version,
             default_response_class=ORJSONResponse,
         )
-
+        config_logging(settings)
         self._load_routers(routers)
 
     def _load_routers(self, routers: list):

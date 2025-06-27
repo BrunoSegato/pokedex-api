@@ -5,8 +5,11 @@ from typing import Callable
 
 from fastapi import status
 
+from pokedex.config import Settings
 from pokedex.healthcheck.schemas import HealthCheckModel, PingModel
-from pokedex.settings import Settings
+from pokedex.logs import get_logger
+
+logger = get_logger(__name__)
 
 
 class HealthCheckService:
