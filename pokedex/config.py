@@ -8,17 +8,21 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = Field(
         default="pokedex-api",
-        description="Nome da aplicação (exibido em logs, healthcheck etc)",
+        description="Application name (used in logs, healthcheck, etc.)",
     )
     environment: str = Field(
         default="development",
-        description="Ambiente de execução (development, staging, production)",
+        description="Execution environment (development, staging, production)",
     )
-    version: str = Field(default="0.0.1", description="Versão atual da aplicação")
+    version: str = Field(
+        default="0.0.1", description="Current version of the application"
+    )
 
-    log_level: str = Field(default="INFO", description="Level dos logs do serviço")
-    log_formatter: Literal["standard", "json"] = Field(
-        default="standard", description="Tipo de formato dos logs do serviço"
+    log_level: str = Field(
+        default="INFO", description="Logging level of the application"
+    )
+    log_formatter: Literal["standard"] = Field(
+        default="standard", description="Log formatting style (standard)"
     )
 
     model_config = SettingsConfigDict(

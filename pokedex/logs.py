@@ -1,6 +1,5 @@
 import logging
 import logging.config
-from functools import lru_cache
 
 
 def config_logging(settings):
@@ -40,6 +39,5 @@ def config_logging(settings):
     logging.config.dictConfig(config)
 
 
-@lru_cache()
 def get_logger(name):
     return logging.getLogger(name)
