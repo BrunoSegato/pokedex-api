@@ -5,9 +5,9 @@ from typing import Callable
 
 from fastapi import status
 
+from pokedex.common.logs.config import get_logger
 from pokedex.config import Settings
 from pokedex.healthcheck.schemas import HealthCheckModel, PingModel
-from pokedex.logs import get_logger
 
 logger = get_logger(__name__)
 

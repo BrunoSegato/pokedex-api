@@ -13,6 +13,7 @@ router = APIRouter(tags=["Health"])
     response_model=HealthCheckModel,
     summary="Check the overall health of the service",
     responses=healthcheck_responses,
+    response_model_exclude_none=True,
 )
 async def healthcheck(
     response: Response, service: HealthCheckService = Depends(get_healthcheck_service)
