@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class CheckModel(BaseModel):
     ok: bool
     latency_ms: float
+    error: str | None = None
 
 
 class PingModel(BaseModel):
@@ -19,4 +20,3 @@ class HealthCheckModel(PingModel):
     status: bool
     latency_ms: float
     details: dict[str, CheckModel]
-    status_code: int

@@ -47,6 +47,18 @@ poetry run pre-commit install
 
 ---
 
+## 🔧 Configuração via `.env`
+
+O projeto utiliza [pydantic-settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/) para carregar variáveis de ambiente com validação e tipagem automática.
+
+### Como configurar
+
+1. Copie o arquivo de exemplo `.env.sample` para `.env`:
+   ```bash
+   cp .env.sample .env
+
+---
+
 ## 🛠️ Comandos úteis
 
 Utilize o [Taskipy](https://github.com/illBeRoy/taskipy) para executar tarefas comuns do projeto:

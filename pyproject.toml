@@ -10,6 +10,9 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.13"
 fastapi = {extras = ["standard"], version = "^0.115.13"}
+pydantic = "^2.11.7"
+pydantic-settings = "^2.10.1"
+orjson = "^3.10.18"
 
 
 [tool.poetry.group.lint.dependencies]
@@ -42,6 +45,7 @@ profile = "black"
 
 [tool.flake8]
 max-line-length = 88
+extend-ignore = ["E203", "W503"]
 
 [tool.taskipy.variables]
 src = "pokedex"
