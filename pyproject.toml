@@ -13,6 +13,9 @@ fastapi = {extras = ["standard"], version = "^0.115.13"}
 pydantic = "^2.11.7"
 pydantic-settings = "^2.10.1"
 orjson = "^3.10.18"
+asyncpg = "^0.30.0"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.41"}
+alembic = "^1.16.2"
 
 
 [tool.poetry.group.lint.dependencies]
@@ -49,6 +52,9 @@ profile = "black"
 max-line-length = 88
 extend-ignore = ["E203", "W503"]
 
+[tool.mypy]
+check_untyped_defs = true
+
 [tool.taskipy.variables]
 src = "pokedex"
 
@@ -60,3 +66,4 @@ security = { cmd = "bandit -r {src}", help = "Roda Bandit para verificar falhas 
 precommit = { cmd = "pre-commit run --all-files", help = "Executa todos os hooks do pre-commit manualmente", use_vars = true }
 test = { cmd = "pytest -v tests", help = "Executa os testes com pytest" }
 coverage = { cmd = "pytest -v tests --cov=pokedex --cov-report=xml", help = "Executa os testes com pytest" }
+coverage-html = { cmd = "pytest -v tests --cov=pokedex --cov-report=html", help = "Executa os testes com pytest" }

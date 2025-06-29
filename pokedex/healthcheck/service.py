@@ -5,8 +5,10 @@ from typing import Callable
 
 from fastapi import status
 
+from pokedex.common.database.unit_of_work import DatabaseUnitOfWork
 from pokedex.common.logs.config import get_logger
 from pokedex.config import Settings
+from pokedex.healthcheck.repository import HealthCheckRepository
 from pokedex.healthcheck.schemas import HealthCheckModel, PingModel
 
 logger = get_logger(__name__)
@@ -19,10 +21,12 @@ class HealthCheckService:
     CODE_503 = status.HTTP_503_SERVICE_UNAVAILABLE
     CODE_200 = status.HTTP_200_OK
 
-    def __init__(self, settings: "Settings"):
+    def __init__(self, settings: "Settings", db: "DatabaseUnitOfWork"):
         self._checks: dict[str, Callable] = {}
         self._settings: "Settings" = settings
+        self._repository: "HealthCheckRepository" = HealthCheckRepository(db)
         self.add_checks("service", self.check_service)
+        self.add_checks("database", self.check_db)
 
     def add_checks(self, name: str, func: Callable) -> None:
         if name not in self._checks:
@@ -35,6 +39,13 @@ class HealthCheckService:
 
     async def check_service(self) -> bool:
         return self.CHECK_STATUS
+
+    async def check_db(self) -> bool:
+        try:
+            await self._repository.check_connection()
+            return True
+        except Exception:
+            return False
 
     async def is_healthy(self) -> tuple[HealthCheckModel, int]:
         result = {}

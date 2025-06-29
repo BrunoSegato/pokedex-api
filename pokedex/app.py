@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
+from pokedex.common.dependencies import get_settings
 from pokedex.common.logs.config import config_logging
-from pokedex.config import get_settings
 from pokedex.utils import load_identifier
 
 settings = get_settings()

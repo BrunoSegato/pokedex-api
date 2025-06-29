@@ -1,7 +1,10 @@
+from unittest.mock import AsyncMock, MagicMock
+
 import pytest
 
 from pokedex.app import Application
-from pokedex.config import Settings, get_settings
+from pokedex.common.dependencies import DatabaseUnitOfWork, get_settings
+from pokedex.config import Settings
 from pokedex.middlewares import middlewares
 from tests.fake.routers import routers
 
@@ -24,3 +27,19 @@ def application(routes, middleware) -> Application:
 @pytest.fixture
 def settings() -> Settings:
     return get_settings()
+
+
+@pytest.fixture
+def mock_session(mocker):
+    session = AsyncMock()
+    return session
+
+
+@pytest.fixture
+def mock_uow(mocker, mock_session, settings):
+    factory = MagicMock(return_value=mock_session)
+    mocker.patch("pokedex.common.database.unit_of_work.create_async_engine")
+    mocker.patch(
+        "pokedex.common.database.unit_of_work.sessionmaker", return_value=factory
+    )
+    return DatabaseUnitOfWork(settings=settings)

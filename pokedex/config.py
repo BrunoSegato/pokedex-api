@@ -1,4 +1,3 @@
-from functools import lru_cache
 from typing import Literal
 
 from pydantic import Field
@@ -25,11 +24,11 @@ class Settings(BaseSettings):
         default="standard", description="Log formatting style (standard)"
     )
 
+    postgres_url: str = Field(
+        default="postgresql+asyncpg://postgres:postgres@localhost:5432/pokedex",
+        description="Host do banco de dados Postgres",
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env", env_file_enconding="utf-8", case_sensitive=False
     )
-
-
-@lru_cache()
-def get_settings() -> Settings:
-    return Settings()
