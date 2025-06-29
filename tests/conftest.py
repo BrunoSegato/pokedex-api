@@ -1,4 +1,4 @@
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock
 
 import pytest
 
@@ -30,16 +30,26 @@ def settings() -> Settings:
 
 
 @pytest.fixture
-def mock_session(mocker):
-    session = AsyncMock()
-    return session
+def mock_session_factory(mocker):
+    mock_session = AsyncMock()
+    mock_session.execute = AsyncMock()
+    mock_session.commit = AsyncMock()
+    mock_session.rollback = AsyncMock()
+    mock_session.close = AsyncMock()
+
+    mock_session_cm = AsyncMock()
+    mock_session_cm.__aenter__.return_value = mock_session
+    factory = mocker.Mock(return_value=mock_session_cm)
+
+    return factory, mock_session
 
 
-@pytest.fixture
-def mock_uow(mocker, mock_session, settings):
-    factory = MagicMock(return_value=mock_session)
+@pytest.fixture(scope="function")
+def mock_uow(mocker, mock_session_factory, settings):
+    factory, mock_session = mock_session_factory
     mocker.patch("pokedex.common.database.unit_of_work.create_async_engine")
     mocker.patch(
         "pokedex.common.database.unit_of_work.async_sessionmaker", return_value=factory
     )
-    return DatabaseUnitOfWork(settings=settings)
+    uow = DatabaseUnitOfWork(settings=settings)
+    return uow, mock_session
