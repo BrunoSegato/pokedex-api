@@ -18,6 +18,7 @@ Projeto de estudo com [FastAPI](https://fastapi.tiangolo.com/) e [PostgreSQL](ht
 - 🐘 PostgreSQL
 - 🧪 Pytest
 - 📦 Poetry
+- 📜 Alembic (migrations)
 - 🧹 Black, isort, flake8, mypy, bandit
 - 🔁 pre-commit
 - 🔧 Taskipy
@@ -56,6 +57,7 @@ O projeto utiliza [pydantic-settings](https://docs.pydantic.dev/latest/concepts/
 1. Copie o arquivo de exemplo `.env.sample` para `.env`:
    ```bash
    cp .env.sample .env
+   ```
 
 ---
 
@@ -80,6 +82,30 @@ poetry run task --help  # lista todos os comandos disponíveis
 
 ---
 
+## 📜 Migrations com Alembic
+
+Este projeto utiliza o [Alembic](https://alembic.sqlalchemy.org/) para versionamento e aplicação do schema do banco de dados PostgreSQL.
+
+### Criar uma nova migration
+
+Após modificar os modelos SQLAlchemy:
+
+```bash
+poetry run alembic revision --autogenerate -m "descrição da mudança"
+```
+
+### Aplicar todas as migrations
+
+```bash
+poetry run alembic upgrade head
+```
+
+### Rodar migrations em ambiente de testes (usado no CI)
+
+O Alembic é utilizado para subir o schema de teste automaticamente antes dos testes, garantindo que a estrutura do banco esteja sincronizada.
+
+---
+
 ## 🧪 Estrutura sugerida do projeto
 
 ```
@@ -88,6 +114,8 @@ poetry run task --help  # lista todos os comandos disponíveis
 │   ├── main.py             # Ponto de entrada FastAPI
 │   ├── routers/            # Rotas da API
 │   └── models/             # Schemas e modelos
+├── db/                     # Configurações de banco e migrations
+│   ├── migrations/         # Diretório gerado pelo Alembic
 ├── tests/                  # Testes automatizados
 ├── pyproject.toml
 ├── README.md
@@ -131,4 +159,5 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Poetry Docs](https://python-poetry.org/docs/)
+- [Alembic](https://alembic.sqlalchemy.org/)
 - [Taskipy](https://github.com/illBeRoy/taskipy)
