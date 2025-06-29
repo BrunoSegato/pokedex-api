@@ -1,3 +1,5 @@
+from typing import Any
+
 from pokedex.healthcheck.docs.examples import (
     get_healthcheck_available_example,
     get_healthcheck_unavailable_example,
@@ -5,7 +7,7 @@ from pokedex.healthcheck.docs.examples import (
 )
 from pokedex.healthcheck.schemas import HealthCheckModel, PingModel
 
-healthcheck_responses = {
+healthcheck_responses: dict[int | str, dict[str, Any]] | None = {
     200: {
         "model": HealthCheckModel,
         "description": "Service is healthy",
@@ -21,7 +23,7 @@ healthcheck_responses = {
         },
     },
 }
-ping_responses = {
+ping_responses: dict[int | str, dict[str, Any]] | None = {
     200: {
         "model": PingModel,
         "description": "Service is healthy",

@@ -1,7 +1,7 @@
 import socket
 import time
 from datetime import datetime, timezone
-from typing import Callable
+from typing import Any, Callable
 
 from fastapi import status
 
@@ -47,7 +47,7 @@ class HealthCheckService:
         except Exception:
             return False
 
-    async def is_healthy(self) -> tuple[HealthCheckModel, int]:
+    async def is_healthy(self) -> tuple[dict[str, Any], int]:
         result = {}
         all_ok = True
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -70,6 +70,7 @@ class HealthCheckService:
             }
             if not ok:
                 all_ok = False
+
         total_latency = sum(dep["latency_ms"] for dep in result.values())
         data = {
             "service_name": self._settings.app_name,

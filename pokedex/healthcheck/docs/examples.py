@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from pokedex.healthcheck.schemas import HealthCheckModel, PingModel
+from pokedex.healthcheck.schemas import CheckModel, HealthCheckModel, PingModel
 
 
 def get_healthcheck_unavailable_example():
@@ -13,7 +13,7 @@ def get_healthcheck_unavailable_example():
         environment="development",
         status=False,
         latency_ms=0.01,
-        details={"service": {"ok": False, "latency_ms": 0.01}},
+        details={"service": CheckModel(ok=False, latency_ms=0.01)},
     ).model_dump()
 
 
@@ -27,7 +27,7 @@ def get_healthcheck_available_example():
         environment="development",
         status=False,
         latency_ms=0.01,
-        details={"service": {"ok": True, "latency_ms": 0.01}},
+        details={"service": CheckModel(ok=True, latency_ms=0.01)},
     ).model_dump()
 
 

@@ -1,8 +1,7 @@
 from contextlib import asynccontextmanager
 
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from pokedex.config import Settings
 
@@ -15,9 +14,8 @@ class DatabaseUnitOfWork:
             echo=False,
             future=True,
         )
-        self._session_factory = sessionmaker(
+        self._session_factory = async_sessionmaker(
             bind=self._engine,
-            class_=AsyncSession,
             expire_on_commit=False,
         )
         self.session: AsyncSession
