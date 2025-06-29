@@ -66,5 +66,5 @@ typecheck = { cmd = "mypy {src}", help = "Roda verificação de tipos com mypy",
 security = { cmd = "bandit -r {src}", help = "Roda Bandit para verificar falhas de segurança no código", use_vars = true }
 precommit = { cmd = "pre-commit run --all-files", help = "Executa todos os hooks do pre-commit manualmente", use_vars = true }
 test = { cmd = "pytest -v tests", help = "Executa os testes com pytest" }
-coverage = { cmd = "pytest -v tests --cov=pokedex --cov-report=xml", help = "Executa os testes com pytest" }
-coverage-html = { cmd = "pytest -v tests --cov=pokedex --cov-report=html", help = "Executa os testes com pytest" }
+coverage = { cmd = "pytest -v tests --cov=pokedex --cov-report=xml", help = "Executa os testes com pytest e gera o relatório de cobertura em XML (ex: para Codecov ou CI)" }
+coverage-html = { cmd = "pytest -v tests --cov=pokedex --cov-report=html", help = "Executa os testes com pytest e abre um relatório interativo de cobertura em HTML" }
