@@ -40,6 +40,6 @@ def mock_uow(mocker, mock_session, settings):
     factory = MagicMock(return_value=mock_session)
     mocker.patch("pokedex.common.database.unit_of_work.create_async_engine")
     mocker.patch(
-        "pokedex.common.database.unit_of_work.sessionmaker", return_value=factory
+        "pokedex.common.database.unit_of_work.async_sessionmaker", return_value=factory
     )
     return DatabaseUnitOfWork(settings=settings)

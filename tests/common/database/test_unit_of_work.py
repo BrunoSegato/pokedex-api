@@ -24,7 +24,7 @@ class TestDatabaseUnitOfWork:
 
         mocker.patch("pokedex.common.database.unit_of_work.create_async_engine")
         mocker.patch(
-            "pokedex.common.database.unit_of_work.sessionmaker",
+            "pokedex.common.database.unit_of_work.async_sessionmaker",
             return_value=mock_session_factory,
         )
 
