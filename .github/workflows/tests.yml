@@ -10,6 +10,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: pokedex_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      POSTGRES_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/pokedex_test
+
     steps:
     - uses: actions/checkout@v4
 
@@ -28,6 +45,9 @@ jobs:
       run: |
         export PATH="$HOME/.local/bin:$PATH"
         poetry install --with dev
+
+    - name: Run Alembic migrations
+      run: poetry run alembic upgrade head
 
     - name: Run tests
       run: |

@@ -1,12 +1,29 @@
+import asyncio
 from unittest.mock import AsyncMock
 
 import pytest
+from alembic import command
+from alembic.config import Config
 
 from pokedex.app import Application
 from pokedex.common.dependencies import DatabaseUnitOfWork, get_settings
 from pokedex.config import Settings
 from pokedex.middlewares import middlewares
 from tests.fake.routers import routers
+
+
+@pytest.fixture(scope="session")
+def event_loop():
+    return asyncio.get_event_loop()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def run_migrations():
+    alembic_cfg = Config("alembic.ini")
+    alembic_cfg.set_main_option(
+        "sqlalchemy.url", get_settings().postgres_url.replace("+asyncpg", "")
+    )
+    command.upgrade(alembic_cfg, "head")
 
 
 @pytest.fixture(scope="function")
